@@ -1,3 +1,4 @@
+#pragma once
 #include <madness/tensor/clapack.h>
 #include <madness/fortran_ctypes.h>
 
