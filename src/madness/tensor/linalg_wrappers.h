@@ -46,6 +46,9 @@ namespace detail {
     template <typename T>
     void cholesky( char uplo, integer n, T* A, integer lda );
 
+    /// Compute triangular inverse via LAPACK
+    template <typename T>
+    void trtri( char uplo, char diag, integer n, T* A, integer lda );
 
 
 

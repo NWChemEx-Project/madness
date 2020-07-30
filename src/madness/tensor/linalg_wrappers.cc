@@ -520,4 +520,71 @@ namespace madness {
 
 
 
+
+
+
+
+
+
+
+
+    template <>
+    void trtri( char uplo, char diag, integer n, real4* A, integer lda ) {
+
+         integer info;
+
+    #if MADNESS_LINALG_USE_LAPACKE
+        strtri_( &uplo, &diag, &n, A, &lda, &info );
+    #else
+        strtri_( &uplo, &diag, &n, A, &lda, &info, sizeof(char), sizeof(char) );
+    #endif
+    
+        LINALG_ASSERT( (info==0), "Triangular Inverse Failed", info);
+    
+    }
+
+    template <>
+    void trtri( char uplo, char diag, integer n, real8* A, integer lda ) {
+
+         integer info;
+
+    #if MADNESS_LINALG_USE_LAPACKE
+        dtrtri_( &uplo, &diag, &n, A, &lda, &info );
+    #else
+        dtrtri_( &uplo, &diag, &n, A, &lda, &info, sizeof(char), sizeof(char) );
+    #endif
+    
+        LINALG_ASSERT( (info==0), "Triangular Inverse Failed", info);
+    
+    }
+
+    template <>
+    void trtri( char uplo, char diag, integer n, complex_real4* A, integer lda ) {
+
+         integer info;
+
+    #if MADNESS_LINALG_USE_LAPACKE
+        ctrtri_( &uplo, &diag, &n, to_cptr(A), &lda, &info );
+    #else
+        ctrtri_( &uplo, &diag, &n, A, &lda, &info, sizeof(char), sizeof(char) );
+    #endif
+    
+        LINALG_ASSERT( (info==0), "Triangular Inverse Failed", info);
+    
+    }
+
+    template <>
+    void trtri( char uplo, char diag, integer n, complex_real8* A, integer lda ) {
+
+         integer info;
+
+    #if MADNESS_LINALG_USE_LAPACKE
+        ztrtri_( &uplo, &diag, &n, to_zptr(A), &lda, &info );
+    #else
+        ztrtri_( &uplo, &diag, &n, A, &lda, &info, sizeof(char), sizeof(char) );
+    #endif
+    
+        LINALG_ASSERT( (info==0), "Triangular Inverse Failed", info);
+    
+    }
 }

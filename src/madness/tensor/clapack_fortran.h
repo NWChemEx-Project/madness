@@ -75,6 +75,11 @@
 
 #  define dtrsm_ dtrsm
 
+#  define strtri_ strtri
+#  define dtrtri_ dtrtri
+#  define ctrtri_ ctrtri
+#  define ztrtri_ ztrtri
+
 #  define dlamch_ dlamch
 #  define slamch_ slamch
 #else
@@ -321,7 +326,16 @@ void dtrsm_(const char* side, const char* uplo, const char* transa, const char* 
 
 //			SUBROUTINE DTRTRI( UPLO, DIAG, N, A, LDA, INFO )
 extern "C"
+void strtri_(const char* uplo, const char* diag, const integer* n, const real4* a,
+             const integer* lda, integer *info, char_len uplolen, char_len diaglen);
+extern "C"
 void dtrtri_(const char* uplo, const char* diag, const integer* n, const real8* a,
-            const integer* lda, integer *info);
-
+             const integer* lda, integer *info, char_len uplolen, char_len diaglen);
+extern "C"
+void ctrtri_(const char* uplo, const char* diag, const integer* n, const complex_real4* a,
+             const integer* lda, integer *info, char_len uplolen, char_len diaglen);
+extern "C"
+void ztrtri_(const char* uplo, const char* diag, const integer* n, const complex_real8* a,
+             const integer* lda, integer *info, char_len uplolen, char_len diaglen);
+               
 #endif // MADNESS_LINALG_CLAPACK_FORTRAN_H__INCLUDED
